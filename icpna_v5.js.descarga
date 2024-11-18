@@ -1,0 +1,76 @@
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+
+// renombrar caja correo (web mobile)
+$('.ic-Form-control input').each(function() {
+  if($(this).attr("placeholder") == 'Correo electrónico'){
+	 $(this).attr("placeholder", "Código o documento de identidad de alumno"); 
+  }
+});
+
+// botones
+var buttonx = "<button type='button' class='Button' style='margin:0 auto; display:block; width:80%; background-color:#FFFFFF' id='IngresoDocentesM'>INGRESO DOCENTES Y ADMINISTRATIVOS</button>";
+
+// html inicial
+var ini_html = $("#login_form").html();
+
+// nuevo html 2
+$("#login_form").html(ini_html + "<br>" + buttonx);
+
+// docentes
+$('#IngresoDocentesM').click(function() {
+location.href = '/login/saml'
+});
+
+}
+else{
+
+// quitar transparencia
+$('.ic-Login__content').css("opacity", "1");
+// centrar logo
+$('.ic-Login-header').css("padding", "0 180px");
+// ocultar footer
+$(".ic-Login__content #footer").css("cssText", "display: none !important;");
+
+// renombrar label
+$('.ic-Form-control--login label').each(function() {
+  var text = $(this).text();
+  $(this).text(text.replace('Iniciar sesión', 'Código o documento de identidad de alumno'));
+  $(this).text(text.replace('Correo electrónico', 'Código o documento de identidad de alumno'));
+});
+
+// botones
+var button1 = "<button type='button' class='Button' style='margin:0 auto; display:block; width:80%; background-color:#FFFFFF' id='IngresoDocentes'>INGRESO DOCENTES Y ADMINISTRATIVOS</button>";
+// var button2 = "<button type='button' class='Button' style='margin:0 auto; display:block; width:80%; background-color:#FFFFFF' id='IngresoAlumnos'>INGRESO DE ALUMNOS</button>";
+
+// color de cajas
+$("#pseudonym_session_unique_id").css("background-color", "#f5f5f5");
+$("#pseudonym_session_password").css("background-color", "#f5f5f5");
+
+// color de submit
+$(".Button--login").css("background-color", "#1946a0");
+$(".Button--login").css("color", "#FFFFFF");
+
+// html inicial
+var ini_html = $(".ic-Login__body").html();
+
+// nuevo html 2
+$(".ic-Login__body").html("<br>" + ini_html + "<br>" + button1);
+
+// docentes
+$('#IngresoDocentes').click(function() {
+location.href = '/login/saml'
+});
+
+// mostrar login
+$(".ic-Login__content").css("visibility", "visible");
+
+// ocultar puntajes
+/*
+var str1 = $(location).attr('pathname');
+
+if($.inArray('student',ENV['current_user_roles']) > 0 && str1.indexOf("quizzes") != -1){
+	$(".summary").css("cssText", "visibility:hidden !important");
+	$("#quiz-submission-version-table").css("cssText", "visibility:hidden !important");
+};
+*/
+}
